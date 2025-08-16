@@ -1,0 +1,5 @@
+dagshub>=0.6.3
+mlflow<3
+numpy>=2.3.2
+pandas>=2.3.1
+python-dotenv>=1.1.1

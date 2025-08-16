@@ -3,4 +3,6 @@ mlflow<3
 dagshub
 pandas
 numpy
-# pymongo
+pymongo
+
+-e .
