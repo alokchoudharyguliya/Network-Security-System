@@ -5,10 +5,11 @@ logging.basicConfig(level=logging.INFO,format='[%(asctime)s]:%(message)s:')
 project_name="network_security"
 list_of_file=[
     ".github/workflows/.gitkeep",
-    f"src/{project_name}/__init__.py",
-    f"src/{project_name}/components/__init__.py",
-    f"src/{project_name}/constants/__init__.py",
-    f"src/{project_name}/cloud/__init__.py",
+    f"{project_name}/__init__.py",
+    f"{project_name}/components/__init__.py",
+    f"{project_name}/constants/__init__.py",
+    f"{project_name}/cloud/__init__.py",
+    f"src/{project_name}/logging/__init__.py",
     "params.yaml",
     "requirements.txt",
     "config.yaml",

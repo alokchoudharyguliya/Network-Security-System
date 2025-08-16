@@ -3,14 +3,12 @@ import os, sys, json
 load_dotenv()
 MONGO_DB_URL=os.getenv("MONGO_DB_URI")
 print(MONGO_DB_URL)
-import certifi
-ca=certifi.where()
+import certifi # When we try to communicate with MONGO_DB_API we want to certify given API as certified and trusted
+ca=certifi.where() # Certificate authorities
 import pandas as pd
 import numpy as np
 import pymongo
-from src.network_security.exception.exception import NetworkSecurityException
-# from src.network_security.logging.logger import logging
-from logger import logging
+from network_security.exception.exception import NetworkSecurityException
 
 class NetworkDataExtract():
     def __init__(self):
