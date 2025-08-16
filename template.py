@@ -10,6 +10,7 @@ list_of_file=[
     f"src/{project_name}/constants/__init__.py",
     f"src/{project_name}/cloud/__init__.py",
     "params.yaml",
+    "requirements.txt",
     "config.yaml",
     "Dockerfile",
     ".dockerignore",
