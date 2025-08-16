@@ -1,0 +1,6 @@
+python-dotenv
+mlflow<3
+dagshub
+pandas
+numpy
+# pymongo
