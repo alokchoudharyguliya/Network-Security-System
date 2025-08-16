@@ -2,7 +2,7 @@ from  pathlib import Path
 import logging, os
 logging.basicConfig(level=logging.INFO,format='[%(asctime)s]:%(message)s:')
 
-project_name="network-security"
+project_name="network_security"
 list_of_file=[
     ".github/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
