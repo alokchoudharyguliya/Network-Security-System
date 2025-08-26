@@ -16,6 +16,12 @@ class DataIngestion:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
+    def export_collection_as_dataframe(self):
+        try:
+            database_name=self.data_ingestion_config.database_name
+            colleciton_name=self.data_ingestion_config.collection_name
+        except Exception as e:
+            raise NetworkSecurityException()
     def initiate_data_ingestion(self):
         try:
             pass
