@@ -24,9 +24,9 @@ class DataIngestion:
             colleciton=self.mongo_client[database_name][colleciton_name]
             df=pd.DataFrame(list(colleciton.find()))
             if "_id" in df.columns.to_list():
-                df=df.drop(columns=["_id"])
-
-
+                df=df.drop(columns=["_id"],axis=1)
+            df.replace({"na":np.nan},inplace=True)
+            return df
         except Exception as e:
             raise NetworkSecurityException()
     def initiate_data_ingestion(self):
