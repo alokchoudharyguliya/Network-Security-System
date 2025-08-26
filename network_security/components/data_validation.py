@@ -6,7 +6,7 @@ from network_security.logging.logger import logging
 from network_security.constants.training_pipeline import SCHEMA_FILE_PATH
 from scipy.stats import ks_2samp
 import yaml
-from network_security.utils.main_utils.utils  import  read_yaml_file
+from network_security.utils.main_utils.utils  import  read_yaml_file,write_yaml_file
 import pandas as pd, os, sys
 class DataValidation:
     def __init__(self,data_ingestion_artifact:DataIngestionArtifact,data_validation_config:DataValidationConfig):
@@ -39,16 +39,23 @@ class DataValidation:
             for column in base_df.columns:
                 d1=base_df[column]
                 d2=current_df[column]
-                is_sample_dist=ks_2samp(d1,d2)
-                if threshold<=is_sample_dist.pvalue:
+                is_same_dist=ks_2samp(d1,d2)
+                if threshold<=is_same_dist.pvalue:
                     is_found=False
                 else:
                     is_found=True
                     status=False
                 report.update({column:{
-                    "p_value":float(is_sample_dist.pvalue),
+                    "p_value":float(is_same_dist.pvalue),
                     "drift_status":is_found
                 }})
+            drift_report_file_path=self.data_validation_config.drift_report_file_path
+
+            dir_path=os.path.join(drift_report_file_path)
+            os.makedirs(dir_path,exist_ok=True)
+            ## write into the folder the report file
+            write_yaml_file(drift_report_file_path,report)
+            return status
         except Exception as e:
             raise NetworkSecurityException(e,sys)    
     def initiate_data_validation(self)->DataValidationArtifact:
@@ -66,6 +73,19 @@ class DataValidation:
             if not status:
                 error_message=f"{error_message} Test dataframe does not contain all columns.\n"
             ## lets check datadrift
-
+            status=self.detect_dataset_drift(base_df=train_dataframe,current_df=test_dataframe)
+            dir_path=os.path.dirname(self.data_validation_config.valid_train_file_path)
+            os.makedirs(dir_path,exist_ok=True)
+            
+            train_dataframe.to_csv(self.data_validation_config.valid_train_file_path,index=False,header=True)
+            test_dataframe.to_csv(self.data_validation_config.valid_test_file_path,index=False,header=True)
+            data_validation_artifact=DataValidationArtifact(
+                validation_status=status,
+                valid_train_file_path=self.data_ingestion_artifact.trained_file_path,
+                valid_test_file_path=self.data_ingestion_artifact.test_file_path,
+                invalid_test_file_path=None,
+                invalid_train_file_path=None,
+                drift_report_file_path=self.data_validation_config.drift_report_file_path
+            )
         except Exception as e:
             raise NetworkSecurityException(e,sys)
