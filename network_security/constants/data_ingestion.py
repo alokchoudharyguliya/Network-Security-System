@@ -12,6 +12,12 @@ class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig):
         try:
             self.data_ingestion_config=data_ingestion_config
-            
+
         except Exception as e:
-            raise NetworkSecurityException(sys,e)
+            raise NetworkSecurityException(e,sys)
+        
+    def initiate_data_ingestion(self):
+        try:
+            pass
+        except Exception as e:
+            raise NetworkSecurityException
