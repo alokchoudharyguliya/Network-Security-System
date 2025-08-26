@@ -3,6 +3,6 @@ mlflow<3
 dagshub
 pandas
 numpy
-pymongo[srv]==3.6
-
+pymongo
+setuptools
 # -e .
