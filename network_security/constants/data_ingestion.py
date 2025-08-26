@@ -29,8 +29,18 @@ class DataIngestion:
             return df
         except Exception as e:
             raise NetworkSecurityException()
+    def export_data_into_feature_store(self,dataframe:pd.DataFrame):
+        try:
+            feature_store_file_path=self.data_ingestion_config.feature_store_file_path
+            dir_path=os.path.dirname(feature_store_file_path)
+            os.makedirs(dir_path,exist_ok=True)
+            dataframe.to_csv(feature_store_file_path,index=False,header=True)
+            return dataframe
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)
     def initiate_data_ingestion(self):
         try:
-            pass
+            dataframe=self.export_collection_as_dataframe()
+
         except Exception as e:
             raise NetworkSecurityException
