@@ -2,7 +2,7 @@ from network_security.exception.exception import NetworkSecurityException
 from network_security.logging.logger import logging
 
 from network_security.entity.config_entity import DataIngestionConfig
-import os,sys, pymongo,numpy as np
+import os,sys, pymongo,numpy as np, pandas as pd
 from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv 
 load_dotenv()
@@ -22,6 +22,10 @@ class DataIngestion:
             colleciton_name=self.data_ingestion_config.collection_name
             self.mongo_client=pymongo.MongoClient(MONGO_DB_URL)
             colleciton=self.mongo_client[database_name][colleciton_name]
+            df=pd.DataFrame(list(colleciton.find()))
+            if "_id" in df.columns.to_list():
+                df=df.drop(columns=["_id"])
+
 
         except Exception as e:
             raise NetworkSecurityException()
