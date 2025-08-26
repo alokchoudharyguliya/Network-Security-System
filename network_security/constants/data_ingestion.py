@@ -11,6 +11,7 @@ MONGO_DB_URL=os.getenv("MONGO_DB_URI")
 class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig):
         try:
-            pass
+            self.data_ingestion_config=data_ingestion_config
+            
         except Exception as e:
-            raise e
+            raise NetworkSecurityException(sys,e)
