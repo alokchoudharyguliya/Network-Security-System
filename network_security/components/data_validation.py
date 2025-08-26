@@ -32,7 +32,25 @@ class DataValidation:
             return False
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-
+    def detect_dataset_drift(self,base_df,current_df,threshold=0.05)->bool:
+        try:
+            status=True
+            report={}
+            for column in base_df.columns:
+                d1=base_df[column]
+                d2=current_df[column]
+                is_sample_dist=ks_2samp(d1,d2)
+                if threshold<=is_sample_dist.pvalue:
+                    is_found=False
+                else:
+                    is_found=True
+                    status=False
+                report.update({column:{
+                    "p_value":float(is_sample_dist.pvalue),
+                    "drift_status":is_found
+                }})
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)    
     def initiate_data_validation(self)->DataValidationArtifact:
         try:
             train_file_path=self.data_ingestion_artifact.trained_file_path
@@ -47,6 +65,7 @@ class DataValidation:
             status=self.validate__number_of_columns(dataframe=test_dataframe)
             if not status:
                 error_message=f"{error_message} Test dataframe does not contain all columns.\n"
-            
+            ## lets check datadrift
+
         except Exception as e:
             raise NetworkSecurityException(e,sys)
