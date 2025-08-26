@@ -20,6 +20,9 @@ class DataIngestion:
         try:
             database_name=self.data_ingestion_config.database_name
             colleciton_name=self.data_ingestion_config.collection_name
+            self.mongo_client=pymongo.MongoClient(MONGO_DB_URL)
+            colleciton=self.mongo_client[database_name][colleciton_name]
+
         except Exception as e:
             raise NetworkSecurityException()
     def initiate_data_ingestion(self):
