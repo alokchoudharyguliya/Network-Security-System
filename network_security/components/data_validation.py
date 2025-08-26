@@ -16,3 +16,20 @@ class DataValidation:
             self._schema_config=read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
             raise NetworkSecurityException(e,sys)
+    @staticmethod
+    def read_data(file_path)->pd.DataFrame:
+        try:
+            return pd.read_csv(file_path)
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)
+        
+    def initiate_data_validation(self)->DataValidationArtifact:
+        try:
+            train_file_path=self.data_ingestion_artifact.trained_file_path
+            test_file_path=self.data_ingestion_artifact.test_file_path
+            ## read the dat from train and test
+            train_dataframe=DataValidation.read_data(train_file_path)
+            test_dataframe=DataValidation.read_data(test_file_path)
+            
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)
