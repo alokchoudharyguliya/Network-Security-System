@@ -42,7 +42,11 @@ class DataIngestion:
         try:
             train_set,test_set=train_test_split(dataframe,test_size=self.data_ingestion_config.train_test_ratio)
             logging.info("Performed train test split on the dataframe")
-        
+            logging.info("Exited split_data_as_train_test method to Data_Ingestion class")
+            dir_path=os.path.dirname(self.data_ingestion_config.training_file_path)
+            os.makedirs(dir_path,exist_ok=True)
+            logging.info(f"Exporting train and test file path")
+            train_set.to_csv(self.data_ingestion_config.training_file_path,index=False,header=False)
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     def initiate_data_ingestion(self):
