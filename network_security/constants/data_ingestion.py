@@ -49,11 +49,13 @@ class DataIngestion:
             train_set.to_csv(self.data_ingestion_config.training_file_path,index=False,header=True)
             test_set.to_csv(self.data_ingestion_config.testing_file_path,index=False,header=True)
             logging.info("Exported train and test file path.")
+        
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     def initiate_data_ingestion(self):
         try:
             dataframe=self.export_collection_as_dataframe()
             dataframe=self.export_data_into_feature_store(dataframe)
+            self.split_data_as_train_test(dataframe)
         except Exception as e:
             raise NetworkSecurityException
