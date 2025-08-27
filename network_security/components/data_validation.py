@@ -50,8 +50,9 @@ class DataValidation:
                     "drift_status":is_found
                 }})
             drift_report_file_path=self.data_validation_config.drift_report_file_path
-
-            dir_path=os.path.join(dir_path,drift_report_file_path)
+            print(str(drift_report_file_path))
+            dir_path=os.path.join(self.data_validation_config.data_validation_dir)
+            print(str(dir_path))
             os.makedirs(dir_path,exist_ok=True)
             ## write into the folder the report file
             write_yaml_file(drift_report_file_path,report)
