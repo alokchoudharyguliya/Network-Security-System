@@ -17,4 +17,4 @@ jobs:
             - name: Lint Code
               uses: echo "Linting repository"
             - name: Run unit tests
-              run: echo "Running unit tests"
+              uses: echo "Running unit tests"
