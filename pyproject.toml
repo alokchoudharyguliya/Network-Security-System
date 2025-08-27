@@ -8,12 +8,15 @@ dependencies = [
     "dagshub>=0.6.3",
     "dill>=0.4.0",
     "fastapi[standard]>=0.116.1",
+    "jinja2>=3.1.6",
     "mlflow<3",
     "numpy>=2.3.2",
     "pandas>=2.3.1",
     "pymongo[srv]>=4.14.0",
     "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
     "setuptools>=80.9.0",
+    "streamlit>=1.49.0",
     "uvicorn>=0.35.0",
 ]
 

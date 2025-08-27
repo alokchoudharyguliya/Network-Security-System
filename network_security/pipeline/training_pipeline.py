@@ -35,7 +35,7 @@ class TrainingPipeline:
             
             logging.info(f"Initiate the data Validation")
             data_validation_artifact=data_validation.initiate_data_validation()
-            return data_ingestion_artifact
+            return data_validation_artifact
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     def start_data_transformation(self,data_validation_artifact:DataValidationArtifact):

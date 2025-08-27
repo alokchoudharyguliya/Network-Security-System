@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI + Streamlit Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FastAPI + Streamlit Integration</h1>
+        
+        <div class="info-box">
+            <h3>🚀 API Endpoints:</h3>
+            <ul>
+                <li><strong>Prediction API:</strong> <code>GET /predict/{value}</code></li>
+                <li><strong>Streamlit App:</strong> Run separately on different port</li>
+            </ul>
+        </div>
+
+        <h2>Quick Test</h2>
+        <p>Test the prediction API directly:</p>
+        <ul>
+            <li><a href="/predict/10.5" target="_blank">/predict/10.5</a></li>
+            <li><a href="/predict/25.0" target="_blank">/predict/25.0</a></li>
+            <li><a href="/predict/100.0" target="_blank">/predict/100.0</a></li>
+        </ul>
+
+        <h2>Run Streamlit</h2>
+        <p>To run the Streamlit dashboard:</p>
+        <pre>streamlit run templates/streamlit_app.py</pre>
+        
+        <p>The Streamlit app will run on <code>http://localhost:8501</code></p>
+    </div>
+</body>
+</html>
