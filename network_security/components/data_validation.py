@@ -51,7 +51,7 @@ class DataValidation:
                 }})
             drift_report_file_path=self.data_validation_config.drift_report_file_path
 
-            dir_path=os.path.join(drift_report_file_path)
+            dir_path=os.path.join(dir_path,drift_report_file_path)
             os.makedirs(dir_path,exist_ok=True)
             ## write into the folder the report file
             write_yaml_file(drift_report_file_path,report)
@@ -68,10 +68,10 @@ class DataValidation:
             ## check for the number of columns match validate number of columns
             status=self.validate__number_of_columns(dataframe=train_dataframe)
             if not status:
-                error_message=f"{error_message} Train dataframe does not contain all columns.\n"
+                error_message=f"{status} Train dataframe does not contain all columns.\n"
             status=self.validate__number_of_columns(dataframe=test_dataframe)
             if not status:
-                error_message=f"{error_message} Test dataframe does not contain all columns.\n"
+                error_message=f"{status} Test dataframe does not contain all columns.\n"
             ## lets check datadrift
             status=self.detect_dataset_drift(base_df=train_dataframe,current_df=test_dataframe)
             dir_path=os.path.dirname(self.data_validation_config.valid_train_file_path)
@@ -87,5 +87,6 @@ class DataValidation:
                 invalid_train_file_path=None,
                 drift_report_file_path=self.data_validation_config.drift_report_file_path
             )
+            return data_validation_artifact
         except Exception as e:
             raise NetworkSecurityException(e,sys)
