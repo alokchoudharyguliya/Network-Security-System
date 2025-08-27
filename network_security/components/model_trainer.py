@@ -18,7 +18,7 @@ from sklearn.ensemble import (AdaBoostClassifier,GradientBoostingClassifier,Rand
 import mlflow
 from urllib.parse import urlparse
 import dagshub
-
+dagshub.init(repo_owner="alokchoudhary",repo_name="Network-Security-System",mlflow=True)
 os.environ["MLFLOW_TRACKING_URI"]="https://dagshub.com/alokchoudhary/Network-Security-System.mlflow"
 os.environ["MLFLOW_TRACKING_USERNAME"]="alokchoudhary"
 os.environ["MLFLOW_TRACKING_PASSWORD"]="ba1325e0b08be027b9667e6eab725702d8285115"
