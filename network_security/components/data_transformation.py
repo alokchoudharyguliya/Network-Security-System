@@ -25,6 +25,19 @@ class DataTransformation:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
             
+    def get_data_transformer_object(cls)->Pipeline:
+        """
+        It initializes a KNNImputer object with the parameters specified in the training_pipeline.py file and reutrns a Pipeline object with the KNNImputer object as the first step.
+        Args:
+            cls: DataTransformation
+        Returns:
+            A Pipeline object
+        """
+        logging.info("Entered get_data_transformer_object method of Transformation class")
+        try:
+            KNNImputer(**DATA_TRANSFORMATION_IMPUTER_PARAMS) # ** stands for whatever parameters we are giving here will be considered as key value pairs
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)
 
     def initiate_data_transformation(self)->DataTransformationArtifact:
         try:
@@ -33,5 +46,6 @@ class DataTransformation:
             test_df=DataTransformation.read_data(self.data_validation_artifact.valid_test_file_path)
             input_feature_train_df=train_df.drop(columns=[TARGET_COLUMN])
             target_feature_train_df=train_df[TARGET_COLUMN]
+            target_feature_train_df=target_feature_train_df.replace(-1,0)
         except Exception as e:
             raise NetworkSecurityException(e,sys)
